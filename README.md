@@ -50,13 +50,22 @@
     * `kubectl expose deploy <deploymentName> --port=8080 --type="NodePort"` create a new service and expose it to external traffic
     * `kubectl delete service <name>` delete service
     * `kubectl delete service -l run=<label>` delete service by label 
+
+* **Scaling an application**
+    * Scaling is accomplished by changing the number of replicas in a Deployment
+    * Scaling to zero is also possible, and it will terminate all Pods of the specified Deployment
+    * `kubectl scale deploy <deploymentName> --replicas=4` scale up to 4
+    * `kubectl scale deploy <deploymentName> --replicas=2` scale down to 2
+    * `kubectl get pods -o wide` will show 2 pods are terminating 
     
+-------------------------------------------------------------------  
 ### minikube Command
 * `minikube version`    ckeck minikube verion
 * `minikube start`  start minikube
 * `minikube start --kubernetes-version=v1.11.3` minikube specific version start
 * `minikube delete` delete minikube 
 * `minikube delete; minikube start --kubernetes-version=v1.11.3` minikube delete and start
+* `minikube stop` stop minikube VM
 * `minikube ip` service access ip from outside 
 * `minikube service <name>` open services
 -------------------------
@@ -85,4 +94,3 @@
 * `echo Name of the Pod: $POD_NAME` print the pod name
 * `export NODE_PORT=$(kubectl get services/<deploymentName> -o go-template='{{(index .spec.ports 0).nodePort}}')
 ` store Node Port to $NODE_PORT
-*
